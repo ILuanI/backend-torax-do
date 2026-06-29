@@ -10,7 +10,7 @@ from datetime import datetime
 
 from app.core.database import get_db
 from app.core.email_service import send_email_with_attachment
-from app.core.gemini_service import gemini_service
+from app.services.digital_ocean_ai_service import digital_ocean_ai_service
 from app.core.pdf_generator import generate_recommendation_pdf
 from app.core.permisos import ADMIN_ROLE, DOCTOR_ROLE
 from app.dependencies import require_roles
@@ -52,7 +52,7 @@ async def create_recommendation(prediction_id: int, db: AsyncSession = Depends(g
     if prediction.recomendacion is not None:
         return prediction.recomendacion
 
-    content = await gemini_service.generate_recommendation(prediction, prediction.dato_clinico)
+    content = await digital_ocean_ai_service.generate_recommendation(prediction, prediction.dato_clinico)
     pdf_path = generate_recommendation_pdf(prediction.paciente, prediction, content)
     recommendation = Recomendacion(
         paciente_id=prediction.paciente_id,
