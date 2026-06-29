@@ -21,7 +21,7 @@ python-dotenv==1.0.0
 google-generativeai==0.7.0
 
 # Modelos de IA y procesamiento de imágenes
-scikit-learn==1.3.2
+scikit-learn==1.8.0
 joblib==1.4.0
 numpy==1.26.0
 pillow==10.3.0
