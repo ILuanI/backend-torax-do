@@ -31,6 +31,13 @@ class Settings(BaseSettings):
     model_lr_path: str = Field(default="models_ia/modelo_lr.joblib")
     model_rf_path: str = Field(default="models_ia/modelo_rf.joblib")
 
+    do_ai_api_key: str = Field(default="")
+    do_ai_base_url: str = Field(default="https://inference.do-ai.run/v1")
+    do_ai_model: str = Field(default="openai-gpt-oss-120b")
+    do_ai_temperature: float = Field(default=0.3)
+    do_ai_max_completion_tokens: int = Field(default=800)
+    do_ai_timeout_seconds: int = Field(default=60)
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

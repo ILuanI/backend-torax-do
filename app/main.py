@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.v1 import auth, citas, datos_clinicos, disponibilidad, escaner, medicos, pacientes, predicciones, recomendaciones, roles_permisos, users
+from app.api.v1 import auth, citas, datos_clinicos, disponibilidad, escaner, medicos, pacientes, predicciones, recomendaciones, roles_permisos, users, ai
 from app.config import settings
 
 
@@ -30,6 +30,7 @@ app.include_router(datos_clinicos.router, prefix="/api/v1")
 app.include_router(predicciones.router, prefix="/api/v1")
 app.include_router(recomendaciones.router, prefix="/api/v1")
 app.include_router(escaner.router, prefix="/api/v1")
+app.include_router(ai.router, prefix="/api/v1")
 
 
 @app.get("/health", tags=["health"])

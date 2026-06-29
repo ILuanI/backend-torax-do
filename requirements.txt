@@ -36,3 +36,4 @@ fastapi-mail==1.4.1
 python-dateutil==2.9.0
 typing-extensions==4.12.0
 pydantic-settings==2.2.0
+httpx==0.27.2
