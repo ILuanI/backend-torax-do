@@ -29,7 +29,12 @@ def generate_recommendation_pdf(
         Paragraph(f"Probabilidad: {prediccion.probabilidad}", styles["Normal"]),
         Spacer(1, 12),
         Paragraph("Recomendaciones", styles["Heading2"]),
-        Paragraph(recommendation_text.replace("\n", "<br/>"), styles["BodyText"]),
     ]
+    import html
+    import re
+    # Convert literal AI <br> tags to newlines, escape other HTML to avoid XML crashes, then use ReportLab's <br/>
+    clean_text = re.sub(r'<br\s*/?>', '\n', recommendation_text, flags=re.IGNORECASE)
+    safe_text = html.escape(clean_text).replace("\n", "<br/>")
+    story.append(Paragraph(safe_text, styles["BodyText"]))
     document.build(story)
     return path
