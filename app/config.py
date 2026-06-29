@@ -52,8 +52,10 @@ class Settings(BaseSettings):
     def default_database_url(cls, value: Any) -> Any:
         if value == "" or value is None:
             return "postgresql+asyncpg://user:password@localhost:5432/database_name"
-        if isinstance(value, str) and value.startswith("postgresql://"):
-            return value.replace("postgresql://", "postgresql+asyncpg://", 1)
+        if isinstance(value, str):
+            if value.startswith("postgresql://"):
+                value = value.replace("postgresql://", "postgresql+asyncpg://", 1)
+            value = value.replace("?sslmode=require", "")
         return value
 
     @field_validator("mail_port", mode="before")
